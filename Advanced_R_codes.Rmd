@@ -86,13 +86,13 @@ gdp_bysp<-iris%>%group_by(Species, Petal.Length)%>%summarize(mean_sp=mean(Sepal.
 
 gdp_bysp<-iris%>%group_by(Species, Petal.Length)%>%summarize(mean_sp=mean(Sepal.Width), mean_pt=mean(Petal.Length), sd_pl=mean(Sepal.Length))
 
-##############################################################################
+
 #Challenge
 #use gropu_by(),summarize(),mean(),sd(),min(),max(), to calculate the mean, sd,max value, min value of each species' sepal.width
  gt <- iris%>%group_by(Species)%>%summarize(sp_mean=mean(Sepal.Width),sd_sp_w=sd(Sepal.Width),min_sp_w=min(Sepal.Width),max_sp_w=max(Sepal.Width))
 view(gt)
 
-########################################################################
+
 
 #mutate()
 #creates new variable in a data frane
