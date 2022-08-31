@@ -1,0 +1,110 @@
+|                                           |
+|:------------------------------------------|
+| Advanced r programming language by samuel |
+
+### Challenge 1
+
+```{r}
+
+
+#Loading the data
+
+library(tidyverse)
+attach(iris)
+#use both filter() and select() to create a data frame that contains sepal length >5 and sepal width and species
+iris_sepal.length<- iris%>%select(Sepal.Length,Sepal.Width,Species) %>% filter(Sepal.Length>5)
+view(iris_sepal.length) 
+
+```
+
+### Challenge 2
+
+```{r}
+
+#use gropu_by(),summarize(),mean(),sd(),min(),max(), to calculate the mean, sd,max value, min value of each species' sepal.width
+ gt <- iris%>%group_by(Species)%>%summarize(sp_mean=mean(Sepal.Width),sd_sp_w=sd(Sepal.Width),min_sp_w=min(Sepal.Width),max_sp_w=max(Sepal.Width))
+view(gt)
+```
+
+### Challenge 3
+
+```{r}
+
+#use group_by()mutate(),summarize(), mean(),sd(),min(),max(), to calc the mean,sd, find max,and min of a new column of variable called SPlength where the Sepal.Length is divide by Petal.Length
+
+spl <- iris%>%mutate(SPlength=Sepal.Length/Petal.Length) %>% group_by(Species)%>%summarize(mean_SPlength=mean(SPlength),sd_SPlength=sd(SPlength),min_splength=min(SPlength),max_splength=max(SPlength))
+view(spl)
+```
+
+### NOTES
+
+```{r}
+#Loading the data
+
+library(tidyverse)
+## select()
+##allows you to select variables from a huge datasets
+
+sepal<-select(iris,Sepal.Length,Sepal.Width)
+
+#lets use pipe
+
+sepal<-iris%>%select(Sepal.Length,Sepal.Width)
+
+#removing a column
+
+
+less_sepal<- select(sepal, -Sepal.Length)
+
+#Renaming a column
+
+#tidy_sepal<- iris%>%rename(Sepal_width=Sepal.width)
+
+#filter()
+
+iris2<-iris%>%filter(Species=="virginica") #>6
+
+s<-iris%>%filter(Species=="setosa")%>%select(Sepal.Length,Sepal.Width)
+
+
+
+  #Challenge
+#use both filter() and select() to create a data frame that contains sepal length >5 and sepal width and species
+iris_sepal.length<- iris%>%select(Sepal.Length,Sepal.Width,Species) %>% filter(Sepal.Length>5)
+view(iris_sepal.length) 
+
+
+
+#group_by()
+#reduces the error prone repetitiveness 
+#check the the structure of the data using str()
+str(iris)
+str(iris%>%group_by(Species))
+gdp_sp<-iris%>%group_by(Species)%>%summarize(mean_species=mean(Sepal.Width))#group per sp and get mean of sepal.with
+
+gdp_bysp<-iris%>%group_by(Species, Petal.Length)%>%summarize(mean_sp=mean(Sepal.Width)) #grp by 2 vars
+
+gdp_bysp<-iris%>%group_by(Species, Petal.Length)%>%summarize(mean_sp=mean(Sepal.Width), mean_pt=mean(Petal.Length), sd_pl=mean(Sepal.Length))
+
+##############################################################################
+#Challenge
+#use gropu_by(),summarize(),mean(),sd(),min(),max(), to calculate the mean, sd,max value, min value of each species' sepal.width
+ gt <- iris%>%group_by(Species)%>%summarize(sp_mean=mean(Sepal.Width),sd_sp_w=sd(Sepal.Width),min_sp_w=min(Sepal.Width),max_sp_w=max(Sepal.Width))
+view(gt)
+
+########################################################################
+
+#mutate()
+#creates new variable in a data frane
+iris_slmn <- iris%>%mutate(Sepal.Length=Sepal.Length*10)
+
+#creating a new column
+iris%>%mutate(slmn=Sepal.Length*10)
+
+
+
+#challenge
+#use group_by()mutate(),summarize(), mean(),sd(),min(),max(), to calc the mean,sd, find max,and min of a new column of variable called SPlength where the Sepal.Length is divide by Petal.Length
+
+SPl <- iris%>%mutate(SPlength=Sepal.Length/Petal.Length) %>% group_by(Species)%>%summarize(mean_SPlength=mean(SPlength),sd_SPlength=sd(SPlength),min_splength=min(SPlength),max_splength=max(SPlength))
+```
